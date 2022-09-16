@@ -6,21 +6,27 @@
     <script type="module" src="popup.js"></script>
 </head>
 <body>
-    <div id="title">
-        gist
-    </div>
-    <strong>Let's summarize some content!</strong>
+    <header class="header">
+        <div class="wrapper">
+          <div class="logo">
+            <img src="./images/icon-48.png" alt="a logo">
+          </div>
+          <div class="header-text">
+            gist
+          </div>
+        </div>
+    </header>
     <fieldset>
         <legend>Select a gist style:</legend>
     
         <div>
-          <input type="radio" id="paragraph" name="gistStyle" value="paragraph"
+          <input type="radio" id="paragraph" name="gist-style" value="paragraph"
                  checked>
           <label for="paragraph">Paragraph style gist</label>
         </div>
     
         <div>
-          <input type="radio" id="bulletpoint" name="gistStyle" value="bulletpoint">
+          <input type="radio" id="bulletpoint" name="gist-style" value="bulletpoint">
           <label for="bulletpoint">Bulletpoint style gist</label>
         </div>
     </fieldset>
