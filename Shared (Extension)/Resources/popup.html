@@ -1,11 +1,29 @@
 <!DOCTYPE html>
 <html>
 <head>
-    <meta charset="UTF-8">
+    <meta charset="UTF-8" name="description" content="gist website summarizer">
     <link rel="stylesheet" href="popup.css">
     <script type="module" src="popup.js"></script>
 </head>
 <body>
-    <strong>Hello World!</strong>
+    <div id="title">
+        gist
+    </div>
+    <strong>Let's summarize some content!</strong>
+    <fieldset>
+        <legend>Select a gist style:</legend>
+    
+        <div>
+          <input type="radio" id="paragraph" name="gistStyle" value="paragraph"
+                 checked>
+          <label for="paragraph">Paragraph style gist</label>
+        </div>
+    
+        <div>
+          <input type="radio" id="bulletpoint" name="gistStyle" value="bulletpoint">
+          <label for="bulletpoint">Bulletpoint style gist</label>
+        </div>
+    </fieldset>
+    <button id="summarize">Create gist</button>
 </body>
 </html>
