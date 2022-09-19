@@ -20,7 +20,7 @@
 
     "content_scripts": [{
         "js": [ "content.js" ],
-        "matches": [ "<all_urls>", "*://simicvm.github.io/*", "*://ai.sony/*" ]
+        "matches": [ "<all_urls>" ]
     }],
 
     "action": {
@@ -36,6 +36,6 @@
     },
 
     "permissions": [
-        "tabs"
-     ]
+        "<all_urls>"
+    ]
 }
