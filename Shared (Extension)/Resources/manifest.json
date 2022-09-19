@@ -35,5 +35,7 @@
         }
     },
 
-    "permissions": [ ]
+    "permissions": [
+        "nativeMessaging"
+    ]
 }
