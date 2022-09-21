@@ -3,18 +3,22 @@ browser.runtime.sendMessage({ greeting: "hello" }).then((response) => {
 });
 
 browser.runtime.onMessage.addListener((request, sender, sendResponse) => {
-    if (!sender.tab) {
+    if (!sender.tab && request.greeting === "summarize") {
         console.log("Received request: ", request);
 
         const documentClone = document.cloneNode(true);
+        
         import('https://cdn.skypack.dev/@mozilla/readability')
         .then((module) => {
             if (module.isProbablyReaderable(documentClone)) {
                 console.log("Page is readable!");
                 const article = new module.Readability(documentClone).parse();
-                console.log(article.title);
-                console.log(article.content)
-                console.log(article.textContent)
+                browser.runtime.sendMessage({ greeting: article }).then((response) => {
+                    console.log("Received response: ", response);
+                });
+                //console.log(article.title);
+                //console.log(article.content)
+                //console.log(article.textContent)
             } else {
                 console.log("Page is not readable!")
             }
