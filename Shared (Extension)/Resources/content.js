@@ -12,13 +12,12 @@ browser.runtime.onMessage.addListener((request, sender, sendResponse) => {
         .then((module) => {
             if (module.isProbablyReaderable(documentClone)) {
                 console.log("Page is readable!");
-                const article = new module.Readability(documentClone).parse();
+                let article = new module.Readability(documentClone).parse();
+                article.description = "extracted text";
+                console.log(article);
                 browser.runtime.sendMessage({ greeting: article }).then((response) => {
                     console.log("Received response: ", response);
                 });
-                //console.log(article.title);
-                //console.log(article.content)
-                //console.log(article.textContent)
             } else {
                 console.log("Page is not readable!")
             }
@@ -28,18 +27,3 @@ browser.runtime.onMessage.addListener((request, sender, sendResponse) => {
         });
     }
 });
-
-/*browser.runtime.onMessage.addListener(
-    function(request, sender, sendResponse) {
-        console.log(sender.tab ?
-                    "from a content script:" + sender.tab.url :
-                    "from the extension");
-    
-    
-        console.log("received message from popup: "+request.greeting);
-    
-        sendResponse({farewell: "I'm good, thank you popup!"});
-    });*/
-
-//console.log(document.body.innerHTML);
-//console.log(document.body.innerText);

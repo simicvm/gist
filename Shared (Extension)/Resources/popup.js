@@ -13,13 +13,7 @@ function notifyBackgroundPage(e) {
   sending.then(handleResponse, handleError);
 }
 
-
-function notifyContentAndBackgroundPage(e) {
-  const sendingToBackground = browser.runtime.sendMessage({
-    greeting: "summarize",
-  });
-  sendingToBackground.then(handleResponse, handleError);
-
+function notifyContentPage(e) {
   browser.tabs.query({active: true, currentWindow: true}, function(tabs) {
       if(tabs.length == 0){ 
         console.log("could not send mesage to current tab");
@@ -34,23 +28,5 @@ function notifyContentAndBackgroundPage(e) {
 }
 
 document.addEventListener("DOMContentLoaded", () => {
-    document.getElementById("summarize").addEventListener("click", notifyContentAndBackgroundPage);
+    document.getElementById("summarize").addEventListener("click", notifyContentPage);
 });
-
-/*document.addEventListener("DOMContentLoaded", () => {
-    document.getElementById("summarize").addEventListener("click", notifyBackgroundPage);
-});
-
-document.getElementById("summarize").onclick = function(){
-    console.log("clicked button");
-
-    browser.tabs.query({active: true, currentWindow: true}, function(tabs) {
-        if(tabs.length == 0){ 
-            console.log("could not send mesage to current tab");
-        }else{
-            browser.tabs.sendMessage(tabs[0].id, {greeting: "hello, how are you content script?"}, function(response) {
-                console.log("received message from content script: "+response.farewell);
-            });
-        }
-    });
-}*/
