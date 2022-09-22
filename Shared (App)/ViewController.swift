@@ -6,7 +6,6 @@
 //
 
 import WebKit
-import os.log
 
 #if os(iOS)
 import UIKit
