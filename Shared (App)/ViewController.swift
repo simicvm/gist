@@ -6,6 +6,7 @@
 //
 
 import WebKit
+import os.log
 
 #if os(iOS)
 import UIKit
@@ -77,5 +78,5 @@ class ViewController: PlatformViewController, WKNavigationDelegate, WKScriptMess
         }
 #endif
     }
-
 }
+

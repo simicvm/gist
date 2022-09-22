@@ -3,5 +3,27 @@ browser.runtime.sendMessage({ greeting: "hello" }).then((response) => {
 });
 
 browser.runtime.onMessage.addListener((request, sender, sendResponse) => {
-    console.log("Received request: ", request);
+    if (!sender.tab && request.greeting === "summarize") {
+        console.log("Received request: ", request);
+
+        const documentClone = document.cloneNode(true);
+        
+        import('https://cdn.skypack.dev/@mozilla/readability')
+        .then((module) => {
+            if (module.isProbablyReaderable(documentClone)) {
+                console.log("Page is readable!");
+                let article = new module.Readability(documentClone).parse();
+                article.description = "extracted text";
+                console.log(article);
+                browser.runtime.sendMessage({ greeting: article }).then((response) => {
+                    console.log("Received response: ", response);
+                });
+            } else {
+                console.log("Page is not readable!")
+            }
+        })
+        .catch((error) => {
+            console.log(error);
+        });
+    }
 });
