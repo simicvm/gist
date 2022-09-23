@@ -6,7 +6,6 @@
 //
 
 import WebKit
-import os.log
 
 #if os(iOS)
 import UIKit
@@ -62,21 +61,36 @@ class ViewController: PlatformViewController, WKNavigationDelegate, WKScriptMess
 
     func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
 #if os(macOS)
-        if (message.body as! String != "open-preferences") {
-            return;
-        }
+        if (message.body as! String == "open-preferences") {
+            SFSafariApplication.showPreferencesForExtension(withIdentifier: extensionBundleIdentifier) { error in
+                guard error == nil else {
+                    // Insert code to inform the user that something went wrong.
+                    return
+                }
 
-        SFSafariApplication.showPreferencesForExtension(withIdentifier: extensionBundleIdentifier) { error in
-            guard error == nil else {
-                // Insert code to inform the user that something went wrong.
-                return
+                DispatchQueue.main.async {
+                    NSApplication.shared.terminate(nil)
+                }
             }
-
+        } else if (message.body as! String == "save-api-key") {
+            print(message.body)
             DispatchQueue.main.async {
-                NSApplication.shared.terminate(nil)
+                self.webView.evaluateJavaScript("document.getElementById('api-key').value") { (result, error) in
+                    if let result = result {
+                        print(result)
+                    }
+                }
             }
+        } else {
+            return
         }
+
+        
 #endif
     }
+    
+    //@IBAction func saveApiKey(_ sender: AnyObject?) {
+    //
+    //}
 }
 
