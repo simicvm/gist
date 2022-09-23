@@ -18,6 +18,9 @@ typealias PlatformViewController = NSViewController
 
 let extensionBundleIdentifier = "com.simicvm.gist.Extension"
 
+let account = "openai"
+let service = "api-token"
+
 class ViewController: PlatformViewController, WKNavigationDelegate, WKScriptMessageHandler {
 
     @IBOutlet var webView: WKWebView!
@@ -76,15 +79,15 @@ class ViewController: PlatformViewController, WKNavigationDelegate, WKScriptMess
             print(message.body)
             DispatchQueue.main.async {
                 self.webView.evaluateJavaScript("document.getElementById('api-key').value") { (result, error) in
-                    if let result = result {
-                        print(result)
+                    if let auth = result {
+                        print("saved auth: ", auth)
+                        KeychainHelper.standard.save(auth as! String, service: service, account: account)
                     }
                 }
             }
         } else {
             return
         }
-
         
 #endif
     }
