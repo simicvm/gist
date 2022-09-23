@@ -21,4 +21,9 @@ function openPreferences() {
     webkit.messageHandlers.controller.postMessage("open-preferences");
 }
 
+function saveApiKey() {
+    webkit.messageHandlers.controller.postMessage("save-api-key");
+}
+
 document.querySelector("button.open-preferences").addEventListener("click", openPreferences);
+document.querySelector("button.save-api-key").addEventListener("click", saveApiKey);

@@ -61,20 +61,25 @@ class ViewController: PlatformViewController, WKNavigationDelegate, WKScriptMess
 
     func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
 #if os(macOS)
-        if (message.body as! String != "open-preferences") {
-            return;
+        if (message.body as! String == "open-preferences") {
+            SFSafariApplication.showPreferencesForExtension(withIdentifier: extensionBundleIdentifier) { error in
+                guard error == nil else {
+                    // Insert code to inform the user that something went wrong.
+                    return
+                }
+
+                DispatchQueue.main.async {
+                    NSApplication.shared.terminate(nil)
+                }
+            }
+        } else if (message.body as! String == "save-api-key") {
+            print(message.body)
+            return
+        } else {
+            return
         }
 
-        SFSafariApplication.showPreferencesForExtension(withIdentifier: extensionBundleIdentifier) { error in
-            guard error == nil else {
-                // Insert code to inform the user that something went wrong.
-                return
-            }
-
-            DispatchQueue.main.async {
-                NSApplication.shared.terminate(nil)
-            }
-        }
+        
 #endif
     }
 }
