@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		AD1591FF28DD95DC00506584 /* OpenAI Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = AD1591FE28DD95DC00506584 /* OpenAI Icon.png */; };
+		AD15920028DD95DC00506584 /* OpenAI Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = AD1591FE28DD95DC00506584 /* OpenAI Icon.png */; };
 		ADB408DE28D2ED07002AD44D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB408DD28D2ED07002AD44D /* AppDelegate.swift */; };
 		ADB408E028D2ED07002AD44D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB408DF28D2ED07002AD44D /* SceneDelegate.swift */; };
 		ADB408E328D2ED07002AD44D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ADB408E128D2ED07002AD44D /* LaunchScreen.storyboard */; };
@@ -90,6 +92,7 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		AD1591FE28DD95DC00506584 /* OpenAI Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "OpenAI Icon.png"; path = "../../../../Downloads/OpenAI Icon.png"; sourceTree = "<group>"; };
 		ADB408C528D2ED06002AD44D /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = Base; path = ../Base.lproj/Main.html; sourceTree = "<group>"; };
 		ADB408C628D2ED06002AD44D /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
 		ADB408C728D2ED06002AD44D /* Style.css */ = {isa = PBXFileReference; lastKnownFileType = text.css; path = Style.css; sourceTree = "<group>"; };
@@ -180,6 +183,7 @@
 		ADB408C328D2ED06002AD44D /* Resources */ = {
 			isa = PBXGroup;
 			children = (
+				AD1591FE28DD95DC00506584 /* OpenAI Icon.png */,
 				ADB408C428D2ED06002AD44D /* Main.html */,
 				ADB408C628D2ED06002AD44D /* Icon.png */,
 				ADB408C728D2ED06002AD44D /* Style.css */,
@@ -387,6 +391,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				AD1591FF28DD95DC00506584 /* OpenAI Icon.png in Resources */,
 				ADB4090B28D2ED07002AD44D /* Icon.png in Resources */,
 				ADB408E328D2ED07002AD44D /* LaunchScreen.storyboard in Resources */,
 				ADB4090928D2ED07002AD44D /* Main.html in Resources */,
@@ -406,6 +411,7 @@
 				ADB408F228D2ED07002AD44D /* Main.storyboard in Resources */,
 				ADB4091028D2ED07002AD44D /* Script.js in Resources */,
 				ADB4091428D2ED07002AD44D /* Assets.xcassets in Resources */,
+				AD15920028DD95DC00506584 /* OpenAI Icon.png in Resources */,
 				ADB4090A28D2ED07002AD44D /* Main.html in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
