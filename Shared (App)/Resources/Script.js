@@ -26,4 +26,4 @@ function saveApiKey() {
 }
 
 document.querySelector("button.open-preferences").addEventListener("click", openPreferences);
-document.querySelector("button.save-api-key").addEventListener("click", saveApiKey);
+document.querySelector("form.save-api-key").addEventListener("submit", saveApiKey);

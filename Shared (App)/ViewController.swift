@@ -74,7 +74,13 @@ class ViewController: PlatformViewController, WKNavigationDelegate, WKScriptMess
             }
         } else if (message.body as! String == "save-api-key") {
             print(message.body)
-            return
+            DispatchQueue.main.async {
+                self.webView.evaluateJavaScript("document.getElementById('api-key').value") { (result, error) in
+                    if let result = result {
+                        print(result)
+                    }
+                }
+            }
         } else {
             return
         }
@@ -82,5 +88,9 @@ class ViewController: PlatformViewController, WKNavigationDelegate, WKScriptMess
         
 #endif
     }
+    
+    //@IBAction func saveApiKey(_ sender: AnyObject?) {
+    //
+    //}
 }
 
