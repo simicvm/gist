@@ -18,12 +18,22 @@ function show(platform, enabled, useSettingsInsteadOfPreferences) {
 }
 
 function openPreferences() {
-    webkit.messageHandlers.controller.postMessage("open-preferences");
+    webkit.messageHandlers.controller.postMessage({ command: "open-preferences" });
 }
 
-function saveApiKey() {
-    webkit.messageHandlers.controller.postMessage("save-api-key");
+function saveApiKey(e) {
+    e.preventDefault();
+    let formData = new FormData(e.target);
+    let formProps = Object.fromEntries(formData);
+    formProps["command"] = "api-key"
+    webkit.messageHandlers.controller.postMessage(formProps);
+}
+
+function retrieveApiKey() {
+    webkit.messageHandlers.controller.postMessage({ command: "retrieve-api-key"});
 }
 
 document.querySelector("button.open-preferences").addEventListener("click", openPreferences);
 document.querySelector("form.save-api-key").addEventListener("submit", saveApiKey);
+document.querySelector("button.retrieve-api-key").addEventListener("click", retrieveApiKey);
+

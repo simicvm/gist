@@ -11,6 +11,8 @@
 		AD15920028DD95DC00506584 /* OpenAI Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = AD1591FE28DD95DC00506584 /* OpenAI Icon.png */; };
 		AD15920228DDD53400506584 /* KeychainHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD15920128DDD53400506584 /* KeychainHelper.swift */; };
 		AD15920328DDD53400506584 /* KeychainHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD15920128DDD53400506584 /* KeychainHelper.swift */; };
+		AD15920428DEC78D00506584 /* KeychainHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD15920128DDD53400506584 /* KeychainHelper.swift */; };
+		AD15920528DEC78E00506584 /* KeychainHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD15920128DDD53400506584 /* KeychainHelper.swift */; };
 		ADB408DE28D2ED07002AD44D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB408DD28D2ED07002AD44D /* AppDelegate.swift */; };
 		ADB408E028D2ED07002AD44D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB408DF28D2ED07002AD44D /* SceneDelegate.swift */; };
 		ADB408E328D2ED07002AD44D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ADB408E128D2ED07002AD44D /* LaunchScreen.storyboard */; };
@@ -479,6 +481,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				ADB4091528D2ED07002AD44D /* SafariWebExtensionHandler.swift in Sources */,
+				AD15920428DEC78D00506584 /* KeychainHelper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -487,6 +490,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				ADB4091628D2ED07002AD44D /* SafariWebExtensionHandler.swift in Sources */,
+				AD15920528DEC78E00506584 /* KeychainHelper.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

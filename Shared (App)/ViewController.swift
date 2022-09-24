@@ -64,7 +64,8 @@ class ViewController: PlatformViewController, WKNavigationDelegate, WKScriptMess
 
     func userContentController(_ userContentController: WKUserContentController, didReceive message: WKScriptMessage) {
 #if os(macOS)
-        if (message.body as! String == "open-preferences") {
+        let message = message.body as! NSDictionary
+        if (message["command"] as! String == "open-preferences") {
             SFSafariApplication.showPreferencesForExtension(withIdentifier: extensionBundleIdentifier) { error in
                 guard error == nil else {
                     // Insert code to inform the user that something went wrong.
@@ -75,15 +76,31 @@ class ViewController: PlatformViewController, WKNavigationDelegate, WKScriptMess
                     NSApplication.shared.terminate(nil)
                 }
             }
-        } else if (message.body as! String == "save-api-key") {
-            print(message.body)
-            DispatchQueue.main.async {
-                self.webView.evaluateJavaScript("document.getElementById('api-key').value") { (result, error) in
-                    if let auth = result {
-                        print("saved auth: ", auth)
-                        KeychainHelper.standard.save(auth as! String, service: service, account: account)
+        } else if (message["command"] as! String == "api-key") {
+            let auth = Data((message["api-key"] as! String).utf8)
+            DispatchQueue.global().async {
+                do {
+                    try KeychainHelper.savePassword(password: auth, service: service, account: account)
+                    print("API key set")
+                } catch KeychainInterface.KeychainError.duplicateItem {
+                    print("API key already exists")
+                    do {
+                        try KeychainHelper.updatePassword(password: auth, service: service, account: account)
+                        print("API key updated")
+                    } catch {
+                        print("couldn't update API key")
                     }
+                } catch {
+                    print("Something else went wrong!")
                 }
+            }
+        } else if (message["command"] as! String == "retrieve-api-key") {
+            do {
+                let apiKey = try KeychainHelper.readPassword(service: service, account: account)
+                let apiKeyString = String(data: apiKey, encoding: .utf8)!
+                print("retrieved api key:", apiKeyString)
+            } catch {
+                print("error in retrieving the message")
             }
         } else {
             return

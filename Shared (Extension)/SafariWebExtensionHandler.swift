@@ -8,6 +8,89 @@
 import SafariServices
 import os.log
 
+let account = "openai"
+let service = "api-token"
+
+struct webPageText {
+    var text: String
+}
+
+struct requestBody: Codable {
+    var model: String
+    var temperature: Int
+    var max_tokens: Int
+    var prompt: String
+}
+
+struct choices: Codable {
+    var text: String
+    var index: Int
+    var logprobs: Int?
+    var finish_reason: String
+}
+
+struct complemtionResponse: Codable {
+    var id: String
+    var object: String
+    var created: Int
+    var model: String
+    var choices: [choices]
+    var usage: [String: Int]
+}
+
+func prepareRequest(prompt: String, apiKey: String) -> URLRequest {
+    // Prepare URL
+    let url = URL(string: "https://api.openai.com/v1/completions")
+    guard let requestUrl = url else { fatalError() }
+
+    // Prepare URL Request Object
+    var request = URLRequest(url: requestUrl)
+    request.httpMethod = "POST"
+    print("url:", request)
+
+    // Set HTTP Requst Header
+    request.setValue("application/json", forHTTPHeaderField: "Content-Type")
+    request.setValue("Bearer \(apiKey)", forHTTPHeaderField: "Authorization")
+
+    // Set HTTP Request Body
+    let params = requestBody(model: "text-davinci-002", temperature: 0, max_tokens: 6, prompt: prompt)
+    let jsonData = try? JSONEncoder().encode(params)
+
+    request.httpBody = jsonData
+    
+    return request
+}
+
+func performRequest(request: URLRequest) {
+    // Perform HTTP Request
+    os_log(.default, "############## Sending Request")
+    let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
+        if let error = error {
+            print(error)
+            return
+        }
+        
+        do {
+            // decode json data
+            let decoder = JSONDecoder()
+            let object = try decoder.decode(complemtionResponse.self, from: data!)
+            
+            // handle success
+            print("API response:\n", object)
+            print("AI answer:", object.choices[0].text)
+            if #available(macOSApplicationExtension 11.0, *) {
+                os_log(.default, "AI answer: \(object.choices[0].text, privacy: .public)")
+            } else {
+                // Fallback on earlier versions
+            }
+        } catch let error {
+            // handle json decoding error
+            print(error)
+        }
+    }
+    task.resume()
+}
+
 let SFExtensionMessageKey = "message"
 
 class SafariWebExtensionHandler: NSObject, NSExtensionRequestHandling {
@@ -16,10 +99,18 @@ class SafariWebExtensionHandler: NSObject, NSExtensionRequestHandling {
         let item = context.inputItems[0] as! NSExtensionItem
         let message = item.userInfo?[SFExtensionMessageKey]
         os_log(.default, "Received message from browser.runtime.sendNativeMessage: %@", message as! CVarArg)
-
+        
+        do {
+            let apiKey = try KeychainHelper.readPassword(service: service, account: account)
+            let apiKeyString = String(data: apiKey, encoding: .utf8)!
+            let request = prepareRequest(prompt: "Say this is a test", apiKey: apiKeyString)
+            performRequest(request: request)
+        } catch {
+            print("something went wrong with retreiving the api key")
+        }
+        
         let response = NSExtensionItem()
-        //response.userInfo = [ SFExtensionMessageKey: [ "Response to": message ] ]
-        response.userInfo = [ SFExtensionMessageKey: [ "Response to": "hello from macOS" ] ]
+        response.userInfo = [ SFExtensionMessageKey: [ "Received text for summarization!" ] ]
 
         context.completeRequest(returningItems: [response], completionHandler: nil)
     }
