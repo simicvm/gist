@@ -61,9 +61,8 @@ func prepareRequest(prompt: String, apiKey: String) -> URLRequest {
     return request
 }
 
-func performRequest(request: URLRequest) {
+func performRequest(request: URLRequest, context: NSExtensionContext) {
     // Perform HTTP Request
-    os_log(.default, "############## Sending Request")
     let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
         if let error = error {
             print(error)
@@ -76,13 +75,15 @@ func performRequest(request: URLRequest) {
             let object = try decoder.decode(complemtionResponse.self, from: data!)
             
             // handle success
-            print("API response:\n", object)
-            print("AI answer:", object.choices[0].text)
             if #available(macOSApplicationExtension 11.0, *) {
-                os_log(.default, "AI answer: \(object.choices[0].text, privacy: .public)")
+                os_log(.default, "$$$$$$$$$$$$$ AI answer: \(object.choices[0].text, privacy: .public)")
             } else {
                 // Fallback on earlier versions
             }
+            
+            let response = NSExtensionItem()
+            response.userInfo = [ SFExtensionMessageKey: [ object.choices[0].text ] ]
+            context.completeRequest(returningItems: [response], completionHandler: nil)
         } catch let error {
             // handle json decoding error
             print(error)
@@ -103,16 +104,12 @@ class SafariWebExtensionHandler: NSObject, NSExtensionRequestHandling {
         do {
             let apiKey = try KeychainHelper.readPassword(service: service, account: account)
             let apiKeyString = String(data: apiKey, encoding: .utf8)!
+            
             let request = prepareRequest(prompt: "Say this is a test", apiKey: apiKeyString)
-            performRequest(request: request)
+            performRequest(request: request, context: context)
         } catch {
             print("something went wrong with retreiving the api key")
         }
-        
-        let response = NSExtensionItem()
-        response.userInfo = [ SFExtensionMessageKey: [ "Received text for summarization!" ] ]
-
-        context.completeRequest(returningItems: [response], completionHandler: nil)
     }
 
 }
