@@ -5,7 +5,7 @@ browser.runtime.onMessage.addListener((request, sender, sendResponse) => {
         sendResponse({ farewell: "goodbye" });
     } else if (request.description = "extracted text") {
         console.log(request.greeting)
-        browser.runtime.sendNativeMessage("application.id", {message: request.greeting}, function(response) {
+        browser.runtime.sendNativeMessage("application.id", {message: request.greeting.textContent}, function(response) {
             console.log("Received sendNativeMessage response:");
             console.log(response);
         });

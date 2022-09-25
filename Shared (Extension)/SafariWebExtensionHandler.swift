@@ -17,7 +17,7 @@ struct webPageText {
 
 struct requestBody: Codable {
     var model: String
-    var temperature: Int
+    var temperature: Double
     var max_tokens: Int
     var prompt: String
 }
@@ -53,7 +53,7 @@ func prepareRequest(prompt: String, apiKey: String) -> URLRequest {
     request.setValue("Bearer \(apiKey)", forHTTPHeaderField: "Authorization")
 
     // Set HTTP Request Body
-    let params = requestBody(model: "text-davinci-002", temperature: 0, max_tokens: 6, prompt: prompt)
+    let params = requestBody(model: "text-davinci-002", temperature: 0.7, max_tokens: 256, prompt: prompt)
     let jsonData = try? JSONEncoder().encode(params)
 
     request.httpBody = jsonData
@@ -99,13 +99,21 @@ class SafariWebExtensionHandler: NSObject, NSExtensionRequestHandling {
     func beginRequest(with context: NSExtensionContext) {
         let item = context.inputItems[0] as! NSExtensionItem
         let message = item.userInfo?[SFExtensionMessageKey]
+        let messageDict = message as! NSDictionary
+        var messageContent = messageDict.value(forKey: "message") as! String
+        messageContent = "Summarize the following text in less than 10 bulletpoints: " + "\"" + messageContent + "\""
+        if #available(macOSApplicationExtension 11.0, *) {
+            os_log(.default, "This is the text from web: \(messageContent, privacy: .public)")
+        } else {
+            // Fallback on earlier versions
+        }
         os_log(.default, "Received message from browser.runtime.sendNativeMessage: %@", message as! CVarArg)
         
         do {
             let apiKey = try KeychainHelper.readPassword(service: service, account: account)
             let apiKeyString = String(data: apiKey, encoding: .utf8)!
             
-            let request = prepareRequest(prompt: "Say this is a test", apiKey: apiKeyString)
+            let request = prepareRequest(prompt: messageContent, apiKey: apiKeyString)
             performRequest(request: request, context: context)
         } catch {
             print("something went wrong with retreiving the api key")
