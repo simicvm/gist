@@ -38,6 +38,16 @@ struct complemtionResponse: Codable {
     var usage: [String: Int]
 }
 
+struct errorResponse: Codable {
+    var error: [String: String?]
+}
+
+extension errorResponse: CustomStringConvertible {
+    var description: String {
+        return "\(error)"
+    }
+}
+
 func prepareRequest(prompt: String, apiKey: String) -> URLRequest {
     // Prepare URL
     let url = URL(string: "https://api.openai.com/v1/completions")
@@ -53,7 +63,7 @@ func prepareRequest(prompt: String, apiKey: String) -> URLRequest {
     request.setValue("Bearer \(apiKey)", forHTTPHeaderField: "Authorization")
 
     // Set HTTP Request Body
-    let params = requestBody(model: "text-davinci-002", temperature: 0.7, max_tokens: 256, prompt: prompt)
+    let params = requestBody(model: "text-davinci-002", temperature: 0.7, max_tokens: 372, prompt: prompt)
     let jsonData = try? JSONEncoder().encode(params)
 
     request.httpBody = jsonData
@@ -77,16 +87,26 @@ func performRequest(request: URLRequest, context: NSExtensionContext) {
             // handle success
             if #available(macOSApplicationExtension 11.0, *) {
                 os_log(.default, "$$$$$$$$$$$$$ AI answer: \(object.choices[0].text, privacy: .public)")
-            } else {
-                // Fallback on earlier versions
+            } else { // Fallback on earlier versions
+                os_log(.default, "Stupid os_log #available issue")
             }
             
             let response = NSExtensionItem()
             response.userInfo = [ SFExtensionMessageKey: [ object.choices[0].text ] ]
             context.completeRequest(returningItems: [response], completionHandler: nil)
-        } catch let error {
+        } catch {
             // handle json decoding error
-            print(error)
+            do {
+                let decoder = JSONDecoder()
+                let object = try decoder.decode(errorResponse.self, from: data!)
+                if #available(macOSApplicationExtension 11.0, *) {
+                    os_log(.error, "$$$$$$$$$$$$$  Error: \(object, privacy: .public)")
+                } else { // Fallback on earlier versions
+                    os_log(.default, "Stupid os_log #available issue")
+                }
+            } catch {
+                os_log(.error, "Error message: %{public}@", error as CVarArg)
+            }
         }
     }
     task.resume()
@@ -116,7 +136,7 @@ class SafariWebExtensionHandler: NSObject, NSExtensionRequestHandling {
             let request = prepareRequest(prompt: messageContent, apiKey: apiKeyString)
             performRequest(request: request, context: context)
         } catch {
-            print("something went wrong with retreiving the api key")
+            os_log(.error, "Something went wrong")
         }
     }
 
