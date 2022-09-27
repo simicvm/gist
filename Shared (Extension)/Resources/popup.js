@@ -15,7 +15,7 @@ function notifyBackgroundPage(e) {
 
 function notifyContentPage(e) {
   browser.tabs.query({active: true, currentWindow: true}, function(tabs) {
-      if(tabs.length == 0){ 
+      if(tabs.length == 0){
         console.log("could not send mesage to current tab");
       }else{
         const sendingToContent = browser.tabs.sendMessage(
@@ -29,4 +29,11 @@ function notifyContentPage(e) {
 
 document.addEventListener("DOMContentLoaded", () => {
     document.getElementById("summarize").addEventListener("click", notifyContentPage);
+});
+
+const theButton = document.querySelector(".button");
+
+theButton.addEventListener("click", () => {
+    theButton.classList.add("button--loading");
+    theButton.innerHTML = 'Creating gist';
 });
