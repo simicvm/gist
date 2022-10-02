@@ -7,11 +7,11 @@
     "version": "1.0",
 
     "icons": {
-        "48": "images/icon-48.png",
-        "96": "images/icon-96.png",
-        "128": "images/icon-128.png",
-        "256": "images/icon-256.png",
-        "512": "images/icon-512.png"
+        "48": "images/gist-icon-48.png",
+        "96": "images/gist-icon-96.png",
+        "128": "images/gist-icon-128.png",
+        "256": "images/gist-icon-256.png",
+        "512": "images/gist-icon-512.png"
     },
 
     "background": {
@@ -26,12 +26,12 @@
     "action": {
         "default_popup": "popup.html",
         "default_icon": {
-            "16": "images/toolbar-icon-16.png",
-            "19": "images/toolbar-icon-19.png",
-            "32": "images/toolbar-icon-32.png",
-            "38": "images/toolbar-icon-38.png",
-            "48": "images/toolbar-icon-48.png",
-            "72": "images/toolbar-icon-72.png"
+            "16": "images/gist-toolbar-icon-16.png",
+            "19": "images/gist-toolbar-icon-19.png",
+            "32": "images/gist-toolbar-icon-32.png",
+            "38": "images/gist-toolbar-icon-38.png",
+            "48": "images/gist-toolbar-icon-48.png",
+            "72": "images/gist-toolbar-icon-72.png"
         }
     },
 

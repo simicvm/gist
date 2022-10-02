@@ -1,6 +1,7 @@
 const theButton = document.querySelector(".button");
 const body = document.querySelector("body");
 const aiSummaryText = document.querySelector(".ai-summary-text");
+const headerText = document.querySelector(".header-text");
 
 function handleResponse(message) {
     console.log(`Message from the background script: ${message}`);
@@ -34,6 +35,7 @@ browser.runtime.onMessage.addListener((request, sender, sendResponse) => {
     if (request.message.description === "summary") {
         theButton.style.display = "none";
         body.style.width = "600px";
+        headerText.innerHTML = "gist: AI Web Page Summary";
         aiSummaryText.style.display = "flex";
         aiSummaryText.innerHTML = request.message.summary;
     } else {
