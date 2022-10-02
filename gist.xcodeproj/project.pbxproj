@@ -7,12 +7,12 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		AD1591FF28DD95DC00506584 /* OpenAI Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = AD1591FE28DD95DC00506584 /* OpenAI Icon.png */; };
-		AD15920028DD95DC00506584 /* OpenAI Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = AD1591FE28DD95DC00506584 /* OpenAI Icon.png */; };
 		AD15920228DDD53400506584 /* KeychainHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD15920128DDD53400506584 /* KeychainHelper.swift */; };
 		AD15920328DDD53400506584 /* KeychainHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD15920128DDD53400506584 /* KeychainHelper.swift */; };
 		AD15920428DEC78D00506584 /* KeychainHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD15920128DDD53400506584 /* KeychainHelper.swift */; };
 		AD15920528DEC78E00506584 /* KeychainHelper.swift in Sources */ = {isa = PBXBuildFile; fileRef = AD15920128DDD53400506584 /* KeychainHelper.swift */; };
+		AD15921528E97E8C00506584 /* gist-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = AD15921428E97E8C00506584 /* gist-icon.png */; };
+		AD15921628E97E8C00506584 /* gist-icon.png in Resources */ = {isa = PBXBuildFile; fileRef = AD15921428E97E8C00506584 /* gist-icon.png */; };
 		ADB408DE28D2ED07002AD44D /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB408DD28D2ED07002AD44D /* AppDelegate.swift */; };
 		ADB408E028D2ED07002AD44D /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = ADB408DF28D2ED07002AD44D /* SceneDelegate.swift */; };
 		ADB408E328D2ED07002AD44D /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = ADB408E128D2ED07002AD44D /* LaunchScreen.storyboard */; };
@@ -23,8 +23,6 @@
 		ADB4090328D2ED07002AD44D /* gist Extension.appex in Embed Foundation Extensions */ = {isa = PBXBuildFile; fileRef = ADB4090228D2ED07002AD44D /* gist Extension.appex */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
 		ADB4090928D2ED07002AD44D /* Main.html in Resources */ = {isa = PBXBuildFile; fileRef = ADB408C428D2ED06002AD44D /* Main.html */; };
 		ADB4090A28D2ED07002AD44D /* Main.html in Resources */ = {isa = PBXBuildFile; fileRef = ADB408C428D2ED06002AD44D /* Main.html */; };
-		ADB4090B28D2ED07002AD44D /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = ADB408C628D2ED06002AD44D /* Icon.png */; };
-		ADB4090C28D2ED07002AD44D /* Icon.png in Resources */ = {isa = PBXBuildFile; fileRef = ADB408C628D2ED06002AD44D /* Icon.png */; };
 		ADB4090D28D2ED07002AD44D /* Style.css in Resources */ = {isa = PBXBuildFile; fileRef = ADB408C728D2ED06002AD44D /* Style.css */; };
 		ADB4090E28D2ED07002AD44D /* Style.css in Resources */ = {isa = PBXBuildFile; fileRef = ADB408C728D2ED06002AD44D /* Style.css */; };
 		ADB4090F28D2ED07002AD44D /* Script.js in Resources */ = {isa = PBXBuildFile; fileRef = ADB408C828D2ED06002AD44D /* Script.js */; };
@@ -96,10 +94,10 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
-		AD1591FE28DD95DC00506584 /* OpenAI Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; name = "OpenAI Icon.png"; path = "../../../../Downloads/OpenAI Icon.png"; sourceTree = "<group>"; };
 		AD15920128DDD53400506584 /* KeychainHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainHelper.swift; sourceTree = "<group>"; };
+		AD15921428E97E8C00506584 /* gist-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "gist-icon.png"; sourceTree = "<group>"; };
+		AD6CDBA928E9848900F1BCA1 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		ADB408C528D2ED06002AD44D /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = Base; path = ../Base.lproj/Main.html; sourceTree = "<group>"; };
-		ADB408C628D2ED06002AD44D /* Icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = Icon.png; sourceTree = "<group>"; };
 		ADB408C728D2ED06002AD44D /* Style.css */ = {isa = PBXFileReference; lastKnownFileType = text.css; path = Style.css; sourceTree = "<group>"; };
 		ADB408C828D2ED06002AD44D /* Script.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = Script.js; sourceTree = "<group>"; };
 		ADB408C928D2ED06002AD44D /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -165,6 +163,7 @@
 		ADB408BD28D2ED06002AD44D = {
 			isa = PBXGroup;
 			children = (
+				AD6CDBA928E9848900F1BCA1 /* README.md */,
 				ADB408C228D2ED06002AD44D /* Shared (App) */,
 				ADB408CB28D2ED07002AD44D /* Shared (Extension) */,
 				ADB408DC28D2ED07002AD44D /* iOS (App) */,
@@ -189,9 +188,8 @@
 		ADB408C328D2ED06002AD44D /* Resources */ = {
 			isa = PBXGroup;
 			children = (
-				AD1591FE28DD95DC00506584 /* OpenAI Icon.png */,
 				ADB408C428D2ED06002AD44D /* Main.html */,
-				ADB408C628D2ED06002AD44D /* Icon.png */,
+				AD15921428E97E8C00506584 /* gist-icon.png */,
 				ADB408C728D2ED06002AD44D /* Style.css */,
 				ADB408C828D2ED06002AD44D /* Script.js */,
 			);
@@ -397,8 +395,7 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				AD1591FF28DD95DC00506584 /* OpenAI Icon.png in Resources */,
-				ADB4090B28D2ED07002AD44D /* Icon.png in Resources */,
+				AD15921528E97E8C00506584 /* gist-icon.png in Resources */,
 				ADB408E328D2ED07002AD44D /* LaunchScreen.storyboard in Resources */,
 				ADB4090928D2ED07002AD44D /* Main.html in Resources */,
 				ADB4090F28D2ED07002AD44D /* Script.js in Resources */,
@@ -412,12 +409,11 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				ADB4090C28D2ED07002AD44D /* Icon.png in Resources */,
 				ADB4090E28D2ED07002AD44D /* Style.css in Resources */,
 				ADB408F228D2ED07002AD44D /* Main.storyboard in Resources */,
 				ADB4091028D2ED07002AD44D /* Script.js in Resources */,
+				AD15921628E97E8C00506584 /* gist-icon.png in Resources */,
 				ADB4091428D2ED07002AD44D /* Assets.xcassets in Resources */,
-				AD15920028DD95DC00506584 /* OpenAI Icon.png in Resources */,
 				ADB4090A28D2ED07002AD44D /* Main.html in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

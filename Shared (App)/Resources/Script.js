@@ -30,7 +30,7 @@ function saveApiKey(e) {
 }
 
 function retrieveApiKey() {
-    webkit.messageHandlers.controller.postMessage({ command: "retrieve-api-key"});
+    webkit.messageHandlers.controller.postMessage({ command: "retrieve-api-key" });
 }
 
 document.querySelector("button.open-preferences").addEventListener("click", openPreferences);
