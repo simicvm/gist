@@ -1,5 +1,5 @@
 browser.runtime.onMessage.addListener((request, sender, sendResponse) => {
-    if (!sender.tab && request.greeting === "summarize") {
+    if (!sender.tab && request.message === "summarize") {
         console.log("Received request: ", request);
 
         const documentClone = document.cloneNode(true);
@@ -10,7 +10,7 @@ browser.runtime.onMessage.addListener((request, sender, sendResponse) => {
                 console.log("Page is readable!");
                 let article = new module.Readability(documentClone).parse();
                 article.description = "extracted text";
-                browser.runtime.sendMessage({ greeting: article }).then((response) => {
+                browser.runtime.sendMessage({ message: article }).then((response) => {
                     console.log("Received response: ", response);
                 });
             } else {
