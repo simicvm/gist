@@ -29,7 +29,7 @@ struct choices: Codable {
     var finish_reason: String
 }
 
-struct complemtionResponse: Codable {
+struct completionResponse: Codable {
     var id: String
     var object: String
     var created: Int
@@ -82,7 +82,7 @@ func performRequest(request: URLRequest, context: NSExtensionContext) {
         do {
             // decode json data
             let decoder = JSONDecoder()
-            let object = try decoder.decode(complemtionResponse.self, from: data!)
+            let object = try decoder.decode(completionResponse.self, from: data!)
             
             // handle success
             if #available(macOSApplicationExtension 11.0, *) {
@@ -134,6 +134,7 @@ class SafariWebExtensionHandler: NSObject, NSExtensionRequestHandling {
             let apiKeyString = String(data: apiKey, encoding: .utf8)!
             
             let request = prepareRequest(prompt: messageContent, apiKey: apiKeyString)
+            //let request = prepareRequest(prompt: "Say 'This is a test'", apiKey: apiKeyString)
             performRequest(request: request, context: context)
         } catch {
             os_log(.error, "Something went wrong")

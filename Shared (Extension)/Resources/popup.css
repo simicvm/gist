@@ -11,6 +11,27 @@ body {
     text-align: center;
 }
 
+.body-scale-up-top {
+    animation: scale-up-top 0.4s cubic-bezier(0.390, 0.575, 0.565, 1.000) both;
+}
+
+@keyframes scale-up-top {
+  0% {
+    transform: scale(1);
+    transform-origin: 50% 0%;
+  }
+  100% {
+    transform: scale(2);
+    transform-origin: 50% 0%;
+  }
+}
+
+.flex-container {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
 button {
     position: relative;
     width: 150px;
@@ -62,6 +83,12 @@ button {
   to {
     transform: rotate(1turn);
   }
+}
+
+.ai-summary-text {
+    display: none;
+    white-space: pre-wrap;
+    text-align: left;
 }
 
 .header {

@@ -32,8 +32,26 @@ document.addEventListener("DOMContentLoaded", () => {
 });
 
 const theButton = document.querySelector(".button");
+const body = document.querySelector("body");
+const html = document.querySelector("html");
+const aiSummaryText = document.querySelector(".ai-summary-text");
+
 
 theButton.addEventListener("click", () => {
     theButton.classList.add("button--loading");
     theButton.innerHTML = 'Creating gist';
+});
+
+browser.runtime.onMessage.addListener((request, sender, sendResponse) => {
+    if (request.message.description === "summary") {
+        sendResponse({ farewell: "thank you!" });
+        theButton.style.display = "none"
+        body.style.width = "600px";
+        aiSummaryText.style.display = "flex";
+        aiSummaryText.innerHTML = request.message.summary;
+        
+    } else {
+        console.log("Received unknown request: ", request);
+        sendResponse({ farewell: "didn't manage to read it properly" });
+    }
 });
