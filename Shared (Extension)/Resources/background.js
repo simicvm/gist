@@ -1,17 +1,12 @@
 browser.runtime.onMessage.addListener((request, sender, sendResponse) => {
     console.log("Received request: ", request);
 
-    if (request.greeting === "hello") {
-        sendResponse({ farewell: "goodbye" });
-    } else if (request.description = "extracted text") {
-        console.log(request.greeting)
+    if (request.description = "extracted text") {
         browser.runtime.sendNativeMessage("application.id", {message: request.greeting.textContent}, function(response) {
-            console.log("Received sendNativeMessage response:");
-            console.log(response);
+            console.log("Received sendNativeMessage response");
             const responseReplace = response[0].replace(/\u21B5/gi, "<br/>").trim();
-            //console.log(responseReplace);
             const summary = {summary: responseReplace, description: "summary"};
-            console.log("sending to popup: ", summary)
+            console.log("Sending summary to popup")
             browser.runtime.sendMessage({ message: summary }).then((response) => {
                 console.log("Received response from popup: ", response);
             });

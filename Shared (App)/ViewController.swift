@@ -108,9 +108,5 @@ class ViewController: PlatformViewController, WKNavigationDelegate, WKScriptMess
         
 #endif
     }
-    
-    //@IBAction func saveApiKey(_ sender: AnyObject?) {
-    //
-    //}
 }
 

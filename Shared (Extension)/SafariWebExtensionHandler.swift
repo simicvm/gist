@@ -56,7 +56,6 @@ func prepareRequest(prompt: String, apiKey: String) -> URLRequest {
     // Prepare URL Request Object
     var request = URLRequest(url: requestUrl)
     request.httpMethod = "POST"
-    print("url:", request)
 
     // Set HTTP Requst Header
     request.setValue("application/json", forHTTPHeaderField: "Content-Type")
@@ -75,7 +74,7 @@ func performRequest(request: URLRequest, context: NSExtensionContext) {
     // Perform HTTP Request
     let task = URLSession.shared.dataTask(with: request) { (data, response, error) in
         if let error = error {
-            print(error)
+            os_log(.error, "Error message: %{public}@", error as CVarArg)
             return
         }
         
@@ -86,9 +85,9 @@ func performRequest(request: URLRequest, context: NSExtensionContext) {
             
             // handle success
             if #available(macOSApplicationExtension 11.0, *) {
-                os_log(.default, "$$$$$$$$$$$$$ AI answer: \(object.choices[0].text, privacy: .public)")
+                os_log(.debug, "AI answer: \(object.choices[0].text, privacy: .public)")
             } else { // Fallback on earlier versions
-                os_log(.default, "Stupid os_log #available issue")
+                os_log(.info, "Using string interpolation in os_log on unsuported macOS version!")
             }
             
             let response = NSExtensionItem()
@@ -100,9 +99,9 @@ func performRequest(request: URLRequest, context: NSExtensionContext) {
                 let decoder = JSONDecoder()
                 let object = try decoder.decode(errorResponse.self, from: data!)
                 if #available(macOSApplicationExtension 11.0, *) {
-                    os_log(.error, "$$$$$$$$$$$$$  Error: \(object, privacy: .public)")
+                    os_log(.error, "Error message: \(object, privacy: .public)")
                 } else { // Fallback on earlier versions
-                    os_log(.default, "Stupid os_log #available issue")
+                    os_log(.info, "Using string interpolation in os_log on unsuported macOS version!")
                 }
             } catch {
                 os_log(.error, "Error message: %{public}@", error as CVarArg)
@@ -123,11 +122,11 @@ class SafariWebExtensionHandler: NSObject, NSExtensionRequestHandling {
         var messageContent = messageDict.value(forKey: "message") as! String
         messageContent = "Summarize the following text in less than 10 bulletpoints: " + "\"" + messageContent + "\""
         if #available(macOSApplicationExtension 11.0, *) {
-            os_log(.default, "This is the text from web: \(messageContent, privacy: .public)")
+            os_log(.debug, "This is the text from web: \(messageContent, privacy: .public)")
         } else {
-            // Fallback on earlier versions
+            os_log(.info, "Using string interpolation in os_log on unsuported macOS version!")
         }
-        os_log(.default, "Received message from browser.runtime.sendNativeMessage: %@", message as! CVarArg)
+        os_log(.debug, "Received message from browser.runtime.sendNativeMessage: %@", message as! CVarArg)
         
         do {
             let apiKey = try KeychainHelper.readPassword(service: service, account: account)

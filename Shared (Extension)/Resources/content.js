@@ -1,7 +1,3 @@
-browser.runtime.sendMessage({ greeting: "hello" }).then((response) => {
-    console.log("Received response: ", response);
-});
-
 browser.runtime.onMessage.addListener((request, sender, sendResponse) => {
     if (!sender.tab && request.greeting === "summarize") {
         console.log("Received request: ", request);
@@ -14,7 +10,6 @@ browser.runtime.onMessage.addListener((request, sender, sendResponse) => {
                 console.log("Page is readable!");
                 let article = new module.Readability(documentClone).parse();
                 article.description = "extracted text";
-                console.log(article);
                 browser.runtime.sendMessage({ greeting: article }).then((response) => {
                     console.log("Received response: ", response);
                 });

@@ -6,13 +6,6 @@ function handleError(error) {
   console.log(`Error: ${error}`);
 }
 
-function notifyBackgroundPage(e) {
-  const sending = browser.runtime.sendMessage({
-    greeting: "hello from popup",
-  });
-  sending.then(handleResponse, handleError);
-}
-
 function notifyContentPage(e) {
   browser.tabs.query({active: true, currentWindow: true}, function(tabs) {
       if(tabs.length == 0){
@@ -33,19 +26,17 @@ document.addEventListener("DOMContentLoaded", () => {
 
 const theButton = document.querySelector(".button");
 const body = document.querySelector("body");
-const html = document.querySelector("html");
 const aiSummaryText = document.querySelector(".ai-summary-text");
 
 
 theButton.addEventListener("click", () => {
-    theButton.classList.add("button--loading");
-    theButton.innerHTML = 'Creating gist';
+    theButton.classList.add("button-loading");
+    theButton.innerHTML = "Creating gist";
 });
 
 browser.runtime.onMessage.addListener((request, sender, sendResponse) => {
     if (request.message.description === "summary") {
-        sendResponse({ farewell: "thank you!" });
-        theButton.style.display = "none"
+        theButton.style.display = "none";
         body.style.width = "600px";
         aiSummaryText.style.display = "flex";
         aiSummaryText.innerHTML = request.message.summary;
