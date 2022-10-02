@@ -96,6 +96,7 @@
 /* Begin PBXFileReference section */
 		AD15920128DDD53400506584 /* KeychainHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainHelper.swift; sourceTree = "<group>"; };
 		AD15921428E97E8C00506584 /* gist-icon.png */ = {isa = PBXFileReference; lastKnownFileType = image.png; path = "gist-icon.png"; sourceTree = "<group>"; };
+		AD6CDBA928E9848900F1BCA1 /* README.md */ = {isa = PBXFileReference; lastKnownFileType = net.daringfireball.markdown; path = README.md; sourceTree = "<group>"; };
 		ADB408C528D2ED06002AD44D /* Base */ = {isa = PBXFileReference; lastKnownFileType = text.html; name = Base; path = ../Base.lproj/Main.html; sourceTree = "<group>"; };
 		ADB408C728D2ED06002AD44D /* Style.css */ = {isa = PBXFileReference; lastKnownFileType = text.css; path = Style.css; sourceTree = "<group>"; };
 		ADB408C828D2ED06002AD44D /* Script.js */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.javascript; path = Script.js; sourceTree = "<group>"; };
@@ -162,6 +163,7 @@
 		ADB408BD28D2ED06002AD44D = {
 			isa = PBXGroup;
 			children = (
+				AD6CDBA928E9848900F1BCA1 /* README.md */,
 				ADB408C228D2ED06002AD44D /* Shared (App) */,
 				ADB408CB28D2ED07002AD44D /* Shared (Extension) */,
 				ADB408DC28D2ED07002AD44D /* iOS (App) */,
