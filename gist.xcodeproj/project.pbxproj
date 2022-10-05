@@ -178,9 +178,9 @@
 			isa = PBXGroup;
 			children = (
 				ADB408C928D2ED06002AD44D /* ViewController.swift */,
+				AD15920128DDD53400506584 /* KeychainHelper.swift */,
 				ADB408CA28D2ED07002AD44D /* Assets.xcassets */,
 				ADB408C328D2ED06002AD44D /* Resources */,
-				AD15920128DDD53400506584 /* KeychainHelper.swift */,
 			);
 			path = "Shared (App)";
 			sourceTree = "<group>";
